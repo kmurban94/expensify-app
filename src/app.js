@@ -12,19 +12,6 @@ import { setTimeout } from 'timers';
 
 const store = configureStore();
 
-store.dispatch(addExpense(
-    {description: 'water bill', amount: 4500}
-));
-store.dispatch(addExpense(
-    {description: 'gas bill', createdAt: 1000}
-));
-store.dispatch(addExpense(
-    {description: 'rent', amount: 1095}
-));
-
-const state = store.getState();
-console.log(getVisibleExpenses(state.expenses, state.filters));
-
 const jsx = (
     <Provider store={store}>
         <AppRouter />
