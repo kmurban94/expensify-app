@@ -51,7 +51,7 @@ export class ExpenseListFilters extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     setStartDate: (startDate) => dispatch(setStartDate(startDate)),
-    setEndDate: (endDate) => dispatch(setStartDate(endDate)),
+    setEndDate: (endDate) => dispatch(setEndDate(endDate)),
     sortByAmount: () => dispatch(sortByAmount()),
     sortByDate: () => dispatch(sortByDate()),
     setTextFilter: (text) => dispatch(setTextFilter(text))
