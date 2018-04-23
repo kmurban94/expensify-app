@@ -1,4 +1,4 @@
-import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses} from '../../actions/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses, startRemoveExpense} from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -24,12 +24,12 @@ beforeEach((done) => {
 test('should setup remove expense action object', () => {
     const action = removeExpense({id: '1'});
     expect(action).toEqual({type: 'REMOVE_EXPENSE', id: '1'});
-})
+});
 
 test('should setup edit expense action object', () => {
     const action = editExpense('1', {test: 'test'});
     expect(action).toEqual({type: 'EDIT_EXPENSE', id: '1', updates: {test: 'test'}});
-})
+});
 
 test('should setup add expense action object with provided values', () => {
     const action = addExpense(expenses[2]);
@@ -108,6 +108,18 @@ test('should fetch the expenses from firebase', (done) => {
         expect(actions[0]).toEqual({
             type: 'SET_EXPENSES',
             expenses
+        });
+        done();
+    })
+});
+
+test('should remove expenses from firebase', (done) => {
+    const store = createMockStore({});
+    store.dispatch(startRemoveExpense({id: 1})).then(() => {
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'REMOVE_EXPENSE',
+            id: 1
         });
         done();
     })
